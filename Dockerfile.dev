@@ -1,0 +1,11 @@
+FROM node:current-alpine3.18
+
+WORKDIR '/app'
+
+COPY package.json . 
+RUN npm install
+
+# with volumes mapping we do not need this but keep it for consistency and transparency as we need to copy the source code to the container
+COPY . . 
+
+CMD [ "npm", "run", "start" ]
