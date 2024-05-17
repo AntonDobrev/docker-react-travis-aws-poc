@@ -1,0 +1,11 @@
+# sudo is required to run docker
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t antondobrev/docker-react-travis-aws-poc -f Dockerfile.dev .
+
+# CI=true so that npm does not wait for instructions, just return a report that the test succeeded or failed
+script:
+  - docker run -e CI=true antondobrev/docker-react-travis-aws-poc npm run test
