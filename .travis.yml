@@ -7,3 +7,15 @@ before_install:
 # CI=true so that npm does not wait for instructions, just return a report that the test succeeded or failed
 script:
   - docker run -e CI=true antondobrev/docker-react-travis-aws-poc npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "React CI Demo"
+  env: "ReactCIDemo-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-496142263454"
+  bucket_path: "React CI Demo"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
